@@ -1,12 +1,21 @@
+import genUniqueId from "../utils/genUniqueId";
+import truncate from "../utils/truncate";
+
 class Expense {
   private label: string;
   private amount: number;
   private date: Date;
+  private id: string;
 
   constructor(label: string, amount: number, date: Date | string) {
     this.updateLabel(label);
     this.updateAmount(amount);
     this.updateDate(date);
+    this.id = genUniqueId();
+  }
+
+  getId(): string {
+    return this.id;
   }
 
   getLabel(): string {
@@ -14,7 +23,7 @@ class Expense {
   }
 
   updateLabel(label: string): void {
-    this.label = label;
+    this.label = truncate(label, 20);
   }
 
   getAmount(): number {
